@@ -1,7 +1,4 @@
-# This workflow will create a container image and publish it to ghcr.io
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
-
-name: Create and publish a container image
+name: Create and publish frontend image
 run-name: ${{ github.actor }} is creating and publishing a container image
 on:
   push:
