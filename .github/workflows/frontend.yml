@@ -1,8 +1,8 @@
 name: Create and publish frontend image
-run-name: ${{ github.actor }} is creating and publishing a container image
+
 on:
   push:
-    tags: ['[0-9]+.[0-9]+.[0-9]+']
+    branches: [ "master" ]
 
 env:
   REGISTRY: ghcr.io
