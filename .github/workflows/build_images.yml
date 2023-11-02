@@ -21,9 +21,11 @@ jobs:
           - dockerfile: ./docker/cnil-pia-front/Dockerfile
             image: ghcr.io/tguyader/pia-front
             tags: ghcr.io/tguyader/pia-front:stable
+            folder: ./docker/cnil-pia-front
           - dockerfile: ./docker/cnil-pia-back/Dockerfile
             image: ghcr.io/tguyader/pia-back
             tags: ghcr.io/tguyader/pia-back:stable
+            folder: ./docker/cnil-pia-back
 
     steps:
       - name: Checkout repository
@@ -45,7 +47,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.2.1
         with:
-          context: .
+          context: ${{ matrix.folder }}
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ matrix.tags }}
