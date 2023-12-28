@@ -1,12 +1,11 @@
 services:
   cnil-pia-back:
-    container_name: LINCnil-pia-back
     build: docker/cnil-pia-back
     restart: always
     environment:
       DATABASE_HOST: "database"
-      DATABASE_USERNAME: "postgres"
-      DATABASE_PASSWORD: "somepassword"
+      DATABASE_USERNAME: "pia"
+      DATABASE_PASSWORD: "pia"
       SECRET_KEY_BASE: "somesecret"
     links:
       - database
@@ -18,20 +17,21 @@ services:
       - ./tmp:/opt/bitnami/ruby/lib/ruby/gems/3.1.0/extensions/x86_64-linux/3.1.0-static/racc-1.7.0/
 
   cnil-pia-front:
-    container_name: LINCnil-pia-front
     build: docker/cnil-pia-front
     restart: always
     ports:
       - 0.0.0.0:8080:80
 
   database:
-    container_name: LINCnil-pia-db
     image: postgres:13
     restart: always
     environment:
       POSTGRES_PASSWORD: "somepassword"
+      # POSTGRES_DB: "pia"
+      # POSTGRES_USER: "pia"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
 
 volumes:
   postgres_data:
