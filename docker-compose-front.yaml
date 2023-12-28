@@ -1,0 +1,12 @@
+services:
+  pia-front:
+    image: docker-registry.ref.gnc/gouv-nc/pia-front:stable
+    ports:
+      - "25054:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.1"
+    cap_drop:
+      - ALL

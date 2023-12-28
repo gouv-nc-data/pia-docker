@@ -1,0 +1,20 @@
+services:
+  pia-back:
+    image: docker-registry.ref.gnc/gouv-nc/pia-back:stable
+    labels:
+      - thot.datasource=???
+      - logweb.dtsi_access=ETUDE
+    environment:
+      - DATABASE_HOST: "database"
+      - DATABASE_USERNAME: "postgres"
+      - DATABASE_PASSWORD: "somepassword"
+      - SECRET_KEY_BASE: "somesecret"
+    ports:
+      - "25053:3000"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1"
+    cap_drop:
+      - ALL
